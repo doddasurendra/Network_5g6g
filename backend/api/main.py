@@ -3,7 +3,10 @@ import os
 from typing import Dict, Any, List, Optional
 from fastapi import FastAPI, HTTPException, Query, Body, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
+
+from backend.api.dashboard_html import DASHBOARD_HTML
 
 from core.kpi.kpi_engine import kpi_registry
 from core.kpi.telemetry_adapter import telemetry_service
@@ -29,6 +32,25 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ----------------- Visual Interactive Dashboard -----------------
+@app.get("/", response_class=HTMLResponse)
+@app.get("/dashboard", response_class=HTMLResponse)
+def get_visual_dashboard():
+    return HTMLResponse(content=DASHBOARD_HTML)
+
+@app.post("/api/desktop/launch")
+def launch_desktop_gui():
+    import threading
+    from desktop.app import TelecomIntelligenceApp
+    def _run():
+        try:
+            app = TelecomIntelligenceApp()
+            app.mainloop()
+        except Exception as e:
+            print(f"Tkinter desktop error: {e}")
+    threading.Thread(target=_run, daemon=True).start()
+    return {"status": "SUCCESS", "message": "Desktop Tkinter application initiated."}
 
 # ----------------- Health & Status -----------------
 @app.get("/api/health")
