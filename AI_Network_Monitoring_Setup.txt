@@ -1,0 +1,58 @@
+AI NETWORK MONITORING SYSTEM — DEPENDENCIES & SETUP
+==================================================
+
+FRAMEWORK
+---------
+Streamlit — web app and interactive dashboard framework.
+
+THIRD-PARTY PYTHON LIBRARIES
+---------------------------
+1. streamlit — dashboard UI, buttons, radio controls, columns, session state and reruns.
+2. plotly — interactive KPI optimization summary chart (plotly.graph_objects).
+3. numpy — numeric values for the chart (numpy.linspace, sin and cos).
+
+PYTHON STANDARD LIBRARY
+-----------------------
+random — generates demo/degraded KPI values. It is included with Python and does not need pip installation.
+
+OPTIONAL NETWORK ACCESS
+-----------------------
+The page CSS imports the Inter font from Google Fonts. If the computer has no internet access, the app can still run, but the browser may use the fallback font instead.
+
+REQUIREMENTS FILE
+-----------------
+Use the accompanying requirements.txt file to install the external dependencies.
+
+RECOMMENDED ENVIRONMENT
+----------------------
+Python 3.11
+
+INSTALL AND RUN (WINDOWS)
+-------------------------
+1. Install Python 3.11 from https://www.python.org/downloads/ . During installation, enable "Add Python to PATH".
+2. Put the Python app file and requirements.txt in the same folder.
+3. Open Command Prompt or PowerShell in that folder.
+4. Create a virtual environment:
+       py -3.11 -m venv .venv
+5. Activate it in Command Prompt:
+       .venv\Scripts\activate
+   Or activate it in PowerShell:
+       .\.venv\Scripts\Activate.ps1
+6. Install dependencies:
+       python -m pip install --upgrade pip
+       python -m pip install -r requirements.txt
+7. Recommended: rename the app file to app.py, then run:
+       python -m streamlit run app.py
+   If you keep the original filename, run (include the quotes):
+       python -m streamlit run "app(20261027-015247).py"
+8. Streamlit should open the dashboard in a browser. If it does not, open the local URL printed in the terminal, usually:
+       http://localhost:8501
+9. Stop the app by pressing Ctrl+C in the terminal.
+
+IMPORTANT NOTES
+---------------
+- Keep the app file and requirements.txt in the same project folder.
+- No CSV file, database, API key, or secret is required by the current code.
+- The dashboard creates sample KPI data randomly when "Find Issue" or "Next Issue" is clicked.
+- Although the UI labels one view "Quantum RL", the uploaded code does not import Qiskit, PennyLane, or another quantum-computing library. The displayed optimization values are currently hard-coded demo values.
+- Do not install pandas, scikit-learn, TensorFlow, PyTorch, Qiskit, or PennyLane for this version; they are not imported by the uploaded code.

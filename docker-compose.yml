@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./telecom_intelligence.db
+      - QISKIT_IBM_TOKEN=${QISKIT_IBM_TOKEN:-}
+    volumes:
+      - .:/app
